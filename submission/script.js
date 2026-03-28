@@ -268,6 +268,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				if(delay <= 0) {
 					play();
 					
+					communicate("play");
+					
 					closeTimeout = setTimeout(() => {
 						document.querySelectorAll("#overlay-container .step.active").forEach(($el) => {
 							$el.classList.remove("active");

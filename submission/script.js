@@ -123,6 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		
 		clearInterval(delayInterval);
 		
+		$skip.classList.add("active");
+		
+		$skipTxt.textContent = "Skip Ad…";
+		
+		/* originally, as a joke, the higher tier plans would make you wait longer before skip even becomes available, but the main joke is the purchase itself so this is disabled:
+		
 		if(allowSkip || !currentSubscription) { // if not currently subscribed, allow "skip" to subscription purchase instantly
 			$skip.classList.add("active");
 			
@@ -148,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					$skipTxt.textContent = `Skip in ${delay.toFixed(1)}…`;
 				}
 			}, 100);
-		}
+		} */
 	}
 	
 	function skip() {

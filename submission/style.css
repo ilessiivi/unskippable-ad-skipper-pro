@@ -128,6 +128,12 @@ body {
 			#subscription.orange .header:after {
 				background: linear-gradient(to right, color-mix(in srgb, var(--orange) 10%, transparent), var(--orange), color-mix(in srgb, var(--orange) 10%, transparent));
 			}
+		#subscription.green .header {
+			background: linear-gradient(to bottom, white, color-mix(in srgb, var(--green) 10%, transparent));
+		}
+			#subscription.green .header:after {
+				background: linear-gradient(to right, color-mix(in srgb, var(--green) 10%, transparent), var(--green), color-mix(in srgb, var(--green) 10%, transparent));
+			}
 		
 		#subscription .header .icon {
 			width: 40px;
@@ -171,6 +177,9 @@ body {
 			}
 			#subscription.orange .header h2 {
 				color: var(--orange);
+			}
+			#subscription.green .header h2 {
+				color: var(--green);
 			}
 	
 	#subscription .content {

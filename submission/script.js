@@ -44,7 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	// Init Skipper Pro Ultra Max Max Neo
 	
-	let currentSubscription = 0; // more subscriptions bought -> longer upsell titles and increased pricing
+	let currentSubscription = 0, // more subscriptions bought -> longer upsell titles and increased pricing
+		currentPlanName = "Pro Ultra";
 	
 	let storage = getLocalStorage();
 	
@@ -54,12 +55,60 @@ document.addEventListener("DOMContentLoaded", () => {
 		if(typeof subs == "number" || (typeof subs == "string" && isFinite(subs))) {
 			currentSubscription = parseInt(subs);
 		}
+		
+		const plan = storage.getItem("currentSkipperProPlan");
+		
+		if(typeof plan == "string" && plan.length > "Pro Ultra".length) {
+			currentPlanName = plan;
+		}
+	}
+	
+	const prices = [3.49, 6.99, 9.99, 12.99, 15.99];
+	
+	const currentPrice = "$"+ (currentSubscription < prices.length ? prices[currentSubscription] : prices[1] * currentSubscription).toFixed(2),
+		upsellPrice = "$"+ ((currentSubscription + 1) < prices.length ? prices[(currentSubscription + 1)] : prices[1] * (currentSubscription + 1)).toFixed(2);
+	
+	const planNameParts = ["Ultra", "Max Max", "Neo", "Pro+", "D1T", "Joel", "E&E"];
+	
+	let upsellPlanName = currentPlanName;
+	
+	for(let i = 0; i < (currentSubscription == 0 ? 2 : (currentSubscription > 3 ? 4 : randomBetween(1, 3))); i++) {
+		let nextName = planNameParts.random();
+		
+		if(currentSubscription < 4 && upsellPlanName.includes(nextName)) { // randomize again if the plan already has one of these to lessen chance of duplicate names (not to entirely block though)
+			nextName = planNameParts.random();
+		}
+		
+		upsellPlanName += " "+ nextName;
+	}
+	
+	document.querySelectorAll(".currentPlanName").forEach(($el) => {
+		$el.textContent = currentPlanName;
+	});
+	document.querySelectorAll(".currentPrice").forEach(($el) => {
+		$el.textContent = currentPrice;
+	});
+	
+	document.querySelectorAll(".upsellPlanName").forEach(($el) => {
+		$el.textContent = upsellPlanName;
+	});
+	document.querySelectorAll(".upsellPrice").forEach(($el) => {
+		$el.textContent = upsellPrice;
+	});
+	
+	if(currentSubscription > 0) {
+		document.querySelector("#subscription").classList.replace("red", "orange");
+		document.querySelector("#subscriptionIcon").src = "icons/upsell.svg";
+		document.querySelector("#purchaseReason").textContent = "Your subscription could be improved!";
+		document.querySelector("#purchaseVerb").textContent = "upgrade";
 	}
 	
 	$container.classList.add("loaded", `subscription-${currentSubscription}`);
 	
 	
 	// State switchers
+	
+	let selectedUpsell = false;
 	
 	let delayInterval = null,
 		closeTimeout = null;
@@ -138,6 +187,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		setTimeout(() => {
 			$terms.classList.replace("right", "active");
 		}, 100);
+		
+		selectedUpsell = (plan === "upsell");
 	}
 	
 	function payment() {
@@ -152,6 +203,23 @@ document.addEventListener("DOMContentLoaded", () => {
 		}, 100);
 		
 		closeTimeout = setTimeout(done, 3000);
+		
+		if(selectedUpsell) {
+			document.querySelector("#subscription").classList.replace("red", "green");
+			document.querySelector("#subscription").classList.replace("orange", "green");
+			document.querySelector("#subscriptionIcon").src = "icons/feature.svg";
+			document.querySelector("#purchaseReason").textContent = "Enjoy your new subscription!";
+			document.querySelector("#purchaseVerb").textContent = "upgrade";
+			
+			document.querySelectorAll(".currentPlanName").forEach(($el) => {
+				$el.textContent = upsellPlanName;
+			});
+		} else {
+			document.querySelector("#subscription").classList.replace("red", "orange");
+			document.querySelector("#subscriptionIcon").src = "icons/upsell.svg";
+			document.querySelector("#purchaseReason").textContent = "Your subscription is renewed!";
+			document.querySelector("#purchaseVerb").textContent = "upgrade";
+		}
 	}
 	
 	function done() {
@@ -162,6 +230,16 @@ document.addEventListener("DOMContentLoaded", () => {
 		setTimeout(() => {
 			$done.classList.replace("right", "active");
 		}, 100);
+		
+		if(storage) {
+			if(selectedUpsell || currentSubscription == 0) {
+				storage.setItem("timesBoughtSkipperPro", ++currentSubscription);
+			}
+			
+			if(selectedUpsell) {
+				storage.setItem("currentSkipperProPlan", upsellPlanName);
+			}
+		}
 	}
 	
 	function resume() {
@@ -242,13 +320,13 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	$check2Label.addEventListener("click", () => {
 		if(!$check1.checked) {
-			alert("Why don't read the terms and conditions first? (Scroll all the way down.)");
+			alert("Why don't you read the terms and conditions first? (Scroll all the way down.)");
 		}
 	});
 	
 	$paymentBtn.addEventListener("click", () => {
 		if(!$check1.checked) {
-			alert("Why don't read the terms and conditions first? (Scroll all the way down.)");
+			alert("Why don't you read the terms and conditions first? (Scroll all the way down.)");
 		} else if(!$check2.checked) {
 			alert("Why don't you agree to the terms and conditions first?");
 		} else {

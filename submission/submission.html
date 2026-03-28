@@ -21,29 +21,29 @@
 		<div id="subscription" class="red">
 			<div class="header">
 				<div class="icon">
-					<img src="icons/expired.svg" alt="" />
+					<img id="subscriptionIcon" src="icons/expired.svg" alt="" />
 				</div>
 				
 				<div class="text">
 					<div class="version">
 						<img src="icons/logo.svg" alt="SKIPPER" />
 						
-						<h1>Pro Ultra</h1>
+						<h1 class="currentPlanName">Pro Ultra</h1>
 					</div>
 					
-					<h2>Your subscription has expired!</h2>
+					<h2 id="purchaseReason">Your subscription has expired!</h2>
 				</div>
 			</div>
 			
 			<div class="content">
 				<div class="step padded active" id="features">
-					<h3>To continue uninterrupted, please renew your subscription!</h3>
+					<h3>To continue uninterrupted, please <span id="purchaseVerb">renew</span> your subscription!</h3>
 					
 					<ul class="features">
 						<li><b>Priority</b> Queue for Video Skipping</li>
 						<li>Remove <b>Most</b> Subscription Popups</li>
 						<li>Fast Customer <b>Support</b> (AI agent)</li>
-						<li>Just <b>$3.49</b>/week!</li>
+						<li>Just <b class="currentPrice">$3.49</b>/week!</li>
 					</ul>
 					
 					<div class="buttons">
@@ -103,13 +103,13 @@
 					<div class="plans">
 						<div class="plan current">
 							<div class="name">
-								<h1>Skipper Pro Ultra…</h1>
+								<h1>Skipper <span class="currentPlanName">Pro Ultra</span>…</h1>
 							</div>
 							
 							<ul class="features">
 								<li>I guess this is fine for me…</li>
 								<li>Watching ads is a good use of my time anyway…</li>
-								<li>$3.49/week is all I can afford…</li>
+								<li><span class="currentPrice">$3.49</span>/week is all I can afford…</li>
 							</ul>
 							
 							<div class="select">
@@ -124,13 +124,13 @@
 							</div>
 							
 							<div class="name">
-								<h1>Skipper Pro Ultra Max Max Neo!</h1>
+								<h1><span class="upsellPlanName">Skipper Pro Ultra Max Max Neo</span>!</h1>
 							</div>
 							
 							<ul class="features">
 								<li><b>Prioritized</b> Video Skipping!</li>
 								<li><b>Verified</b> badge to flex on your friends and family!</li>
-								<li>Just <b>$6.99</b>/week!</li>
+								<li>Just <b class="upsellPrice">$6.99</b>/week!</li>
 							</ul>
 							
 							<div class="select">

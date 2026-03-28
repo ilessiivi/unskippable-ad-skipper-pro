@@ -288,10 +288,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	// Main event listeners
 	
-	setTimeout(() => {
-		skip();
-	}, 200);
-	
 	$skip.addEventListener("click", () => {
 		if(!$container.classList.contains("subscribing")) {
 			if($skip.classList.contains("active")) {

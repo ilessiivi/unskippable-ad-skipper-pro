@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	let delayInterval = null,
 		closeTimeout = null;
 	
-	function play(allowSkip) {
+	function play() {
 		$container.classList.add("playing");
 		$container.classList.remove("subscribing");
 		
@@ -126,35 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		$skip.classList.add("active");
 		
 		$skipTxt.textContent = "Skip Ad…";
-		
-		/* originally, as a joke, the higher tier plans would make you wait longer before skip even becomes available, but the main joke is the purchase itself so this is disabled:
-		
-		if(allowSkip || !currentSubscription) { // if not currently subscribed, allow "skip" to subscription purchase instantly
-			$skip.classList.add("active");
-			
-			$skipTxt.textContent = "Skip Ad…";
-		} else {
-			$skip.classList.remove("active");
-			
-			$skipSub.textContent = [
-				"Just wait a moment!",
-				"Powered by Skipper Pro"
-			].random();
-			
-			let delay = randomBetween(2, 6);
-			
-			$skipTxt.textContent = `Skip in ${delay.toFixed(1)}…`;
-			
-			delayInterval = setInterval(() => {
-				delay -= 0.1;
-				
-				if(delay <= 0) {
-					play(true);
-				} else {
-					$skipTxt.textContent = `Skip in ${delay.toFixed(1)}…`;
-				}
-			}, 100);
-		} */
 	}
 	
 	function skip() {
@@ -310,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		} else {
 			communicate("play");
 			
-			play(true);
+			play();
 		}
 	});
 	

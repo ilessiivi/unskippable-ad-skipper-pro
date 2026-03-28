@@ -72,14 +72,18 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	let upsellPlanName = currentPlanName;
 	
-	for(let i = 0; i < (currentSubscription == 0 ? 2 : (currentSubscription > 3 ? 4 : randomBetween(1, 3))); i++) {
-		let nextName = planNameParts.random();
-		
-		if(currentSubscription < 4 && upsellPlanName.includes(nextName)) { // randomize again if the plan already has one of these to lessen chance of duplicate names (not to entirely block though)
-			nextName = planNameParts.random();
+	if(currentSubscription == 0) { // hardcode the first upsell for memes
+		upsellPlanName += " Max Joel";
+	} else {
+		for(let i = 0; i < (currentSubscription > 3 ? 4 : randomBetween(1, 3)); i++) {
+			let nextName = planNameParts.random();
+			
+			if(currentSubscription < 4 && upsellPlanName.includes(nextName)) { // randomize again if the plan already has one of these to lessen chance of duplicate names (not to entirely block though)
+				nextName = planNameParts.random();
+			}
+			
+			upsellPlanName += " "+ nextName;
 		}
-		
-		upsellPlanName += " "+ nextName;
 	}
 	
 	document.querySelectorAll(".currentPlanName").forEach(($el) => {

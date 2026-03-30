@@ -11,7 +11,7 @@ This GitHub repository contains a template you should fork, modify to include yo
 4. No requests for resources outside of your repository, except for well-known javascript libraries from a CDN (jsdelivr, unpkg, googleapis, etc). Aside from these, include all the assets you need in your repository, such as fonts, icons and everything else. If you have a specific idea which requires access to the Internet, perhaps to fetch live stock market data for example, then try to fake it. If it's important to you to make external requests, talk to us about it in Discord.
 5. WebAssembly and Web Workers are not allowed.
 6. Do not include minified code; this includes code generated from build tools like Vite (see also [disabling minification](https://vite.dev/config/build-options#build-minify)) or WebPack. Prefer not using any build tools, if possible.
-7. Desktop browser functionality is required; mobile-friendly is preferred, but not required.  Test for smooth functionality on desktop browser (especially Chrome/Edge) setups, and optionally also test for mobile-friendliness. Scammers use both heavily, but if your idea requires non-mobile-friendly execution, you have the option. (See also [device mode on Chrome](https://developer.chrome.com/docs/devtools/device-mode/), or [responsive design mode on Firefox](https://firefox-source-docs.mozilla.org/devtools-user/responsive_design_mode/).)
+7. Desktop browser functionality is required; mobile-friendly is preferred, but not required. Your submission will be displayed in an iframe that scales up and down while maintaining its aspect ratio — sides will not get cut off. You can rely on the iframe boundaries (e.g. `position: absolute; right: 0;` will always be the rightmost border of the video). Test for smooth functionality on desktop browser (especially Chrome/Edge) setups, and optionally also test for mobile-friendliness. (See also [device mode on Chrome](https://developer.chrome.com/docs/devtools/device-mode/), or [responsive design mode on Firefox](https://firefox-source-docs.mozilla.org/devtools-user/responsive_design_mode/).)
 
 
 ## Discord
@@ -59,7 +59,11 @@ Use the dropdown in the dev shell to load and test each example.
 
 
 ## Prizes and Judging
-Entries will be shortlisted by a panel of Kitboga Show team members, and will be judged subjectively based on originality, technical merit, entertainment value, and style. The best will go to be showcased and reviewed on-stream, and the best of those will move testing with scammers. Prizes are yet to be determined, but might include merch, signed items, or other surprises.
+Entries will go through a series of progressive rounds of review/judging. They will first be shortlisted by a panel of Kitboga team members based on cleverness, technical skill, hookability, style and humor. See the [main webpage](https://kitboga.com/codejam26) for more clarity on these criteria.
+
+The best submissions will go on to be showcased and reviewed on-stream by Kitboga & Twitch Chat via polling, and the best of those submissions will be tested with scammers.
+
+Prizes will include merch; Amazon Prime, Twitch & Kraken+ subscriptions; Discord emoticons and roles; and more!
 
 ## How to submit
 **Remember, the deadline is Thursday, April 30th at 11:59 PM Eastern Time!**
@@ -69,6 +73,20 @@ Go here: https://kitboga.com/codejam26
 
 ## (Optional) Live Demo
 Add a publicly viewable demo for your submission by enabling GitHub Pages in your repository settings. Navigate to `Settings` > `Pages`, then under `Branch`, select `main`, and then press `Save`. Once the site is built the URL will appear.
+
+## FAQ
+
+**We can use requestAnimationFrame, correct?**
+Yes. Anything but the listed functions under "Forbidden APIs and functions" is allowed.
+
+**Are the ads in the same structure in the live demo? As in, located in ../ads and named something like ad_12.mp4**
+That's just an example which you can use to test your code. You won't know the name or location of the actual videos, but you can get limited info using a `getVideoInfo` request.
+
+**Is the iframe always bound to the confines of the video? Can I rely on `position: absolute; right: 0;` always being the rightmost border of the video?**
+Yes to both. We will force it to be one size, even if it is a bit on the small side for the container, so you have a consistent size to work from.
+
+**Will the actual video during the live demo be responsive? As in — will it change sizes, or just get the sides cut off, e.g. on mobile?**
+It will scale up and down, maintaining the aspect ratio — sides will not get cut off.
 
 ## Further help
 Drop into the Kitboga discord server, and check out the [#code-jam](https://discord.com/channels/331609590229893120/1377638134917103647) channel. Please don't ask questions via email, as we might not see them before the deadline.

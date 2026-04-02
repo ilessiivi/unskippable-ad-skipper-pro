@@ -20,11 +20,13 @@ body {
 	perspective: 100vw;
 	overflow: hidden;
 	transition: background-color 0.8s ease-in-out;
-	display: flex;
+	display: grid;
+	grid-template-columns: 100%;
+	justify-items: center;
 	align-items: center;
-	justify-content: center;
 }
-	#overlay-container.subscribing {
+	#overlay-container.subscribing,
+	#overlay-container.specialOffer {
 		background: rgba(0,0,0,0.5);
 	}
 
@@ -68,7 +70,8 @@ body {
 			display: none;
 		}
 
-#subscription {
+.window {
+	grid-area: 1 / 1 / 2 / 2;
 	font-size: 15px;
 	position: relative;
 	z-index: 1;
@@ -94,8 +97,18 @@ body {
 		opacity: 1;
 		transition: transform 2s var(--bounceEasing), opacity 0.5s ease-in-out;
 	}
+	#overlay-container.specialOffer #pudding {
+		pointer-events: auto;
+		transform: translateY(0) rotateX(0deg) scale(1);
+		opacity: 1;
+		transition: transform 2s var(--bounceEasing), opacity 0.5s ease-in-out;
+	}
+		#overlay-container.subscribing.specialOffer #subscription {
+			transform: translateY(-20px) scale(0.8);
+			opacity: 0.66;
+		}
 	
-	#subscription .header {
+	.window .header {
 		flex: 0 0 auto;
 		border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
 		padding: 20px 16px 16px;
@@ -104,127 +117,183 @@ body {
 		justify-content: center;
 		position: relative;
 	}
-		#subscription .header:after {
+		.window .header:after {
 			content: "";
 			position: absolute;
 			right: 0; bottom: -1px; left: 0;
 			height: 1px;
 		}
 		
-		#subscription.red .header {
+		.window.red .header {
 			background: linear-gradient(to bottom, white, color-mix(in srgb, var(--red) 10%, transparent));
 		}
-			#subscription.red .header:after {
+			.window.red .header:after {
 				background: linear-gradient(to right, color-mix(in srgb, var(--red) 10%, transparent), var(--red), color-mix(in srgb, var(--red) 10%, transparent));
 			}
-		#subscription.orange .header {
+		.window.orange .header {
 			background: linear-gradient(to bottom, white, color-mix(in srgb, var(--orange) 10%, transparent));
 		}
-			#subscription.orange .header:after {
+			.window.orange .header:after {
 				background: linear-gradient(to right, color-mix(in srgb, var(--orange) 10%, transparent), var(--orange), color-mix(in srgb, var(--orange) 10%, transparent));
 			}
-		#subscription.green .header {
+		.window.green .header {
 			background: linear-gradient(to bottom, white, color-mix(in srgb, var(--green) 10%, transparent));
 		}
-			#subscription.green .header:after {
+			.window.green .header:after {
 				background: linear-gradient(to right, color-mix(in srgb, var(--green) 10%, transparent), var(--green), color-mix(in srgb, var(--green) 10%, transparent));
 			}
+		.window.blue .header {
+			background: linear-gradient(to bottom, white, color-mix(in srgb, var(--blue) 10%, transparent));
+		}
+			.window.blue .header:after {
+				background: linear-gradient(to right, color-mix(in srgb, var(--blue) 10%, transparent), var(--blue), color-mix(in srgb, var(--blue) 10%, transparent));
+			}
 		
-		#subscription .header .icon {
+		.window .header .icon {
 			width: 40px;
 			height: 40px;
 			margin-right: 16px;
 		}
-			#subscription .header .icon img {
+			.window .header .icon img {
 				display: block;
 			}
 			
-		#subscription .header .text {
+		.window .header .text {
 			text-align: left;
 		}
 		
-		#subscription .header .version {
+		.window .header h1 {
+			margin: 10px 0;
+			font-size: 20px;
+			line-height: 20px;
+			font-weight: 300;
+			opacity: 0.8;
+		}
+		
+		.window .header .version {
 			margin: 4px 0 6px;
 			display: flex;
 			align-items: center;
 		}
-			#subscription .header .version img {
+			.window .header .version img {
 				display: block;
 				height: 30px;
 			}
-			#subscription .header .version h1 {
+			.window .header .version h1 {
 				margin: 10px 0 0 8px;
-				font-size: 20px;
-				line-height: 20px;
-				font-weight: 300;
-				opacity: 0.8;
 			}
 		
-		#subscription .header h2 {
+		.window .header h2 {
 			margin: 0;
 			font-size: 16px;
 			font-weight: 700;
 			text-transform: uppercase;
 			letter-spacing: 0.4px;
 		}
-			#subscription.red .header h2 {
+			.window.red .header h2 {
 				color: var(--red);
 			}
-			#subscription.orange .header h2 {
+			.window.orange .header h2 {
 				color: var(--orange);
 			}
-			#subscription.green .header h2 {
+			.window.green .header h2 {
 				color: var(--green);
 			}
+			.window.blue .header h2 {
+				color: var(--blue);
+			}
 	
-	#subscription .content {
+	.window .content {
 		flex: 1 1 auto;
 		display: grid;
 		grid-template-columns: 100%;
 		overflow: hidden;
 		overflow-y: auto;
 	}
-		#subscription .content .step {
+		.window .content .step {
 			grid-area: 1 / 1 / 2 / 2;
 			opacity: 0;
 			transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 			pointer-events: none;
 		}
-			#subscription .content .step.active {
+			.window .content .step.active {
 				pointer-events: auto;
 				transform: translateX(0);
 				opacity: 1;
 			}
-			#subscription .content .step.padded {
+			.window .content .step.padded {
 				padding: 0 16px 16px;
 			}
-			#subscription .content .step.left {
+			.window .content .step.left {
 				transform: translateX(-100%);
 			}
-			#subscription .content .step.right {
+			.window .content .step.right {
 				transform: translateX(100%);
 			}
 			
-			#subscription .content .step .inner {
+			.window .content .step .inner {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				min-height: 333px; /* matches the tallest step at max width */
 			}
 			
-		#subscription .content h3 {
+		.window .content h3 {
 			margin: 26px 0;
 			font-size: 16px;
 			font-weight: 500;
 		}
-			#subscription .content h3 + p {
+			.window .content h3 + p {
 				margin-top: -16px;
 			}
 			
-			#subscription .content p + .buttons {
+			.window .content p + .buttons {
 				margin-top: 16px;
 			}
 		
+		.window .content .buttons {
+			margin: 32px 0 0;
+			display: flex;
+			justify-content: center;
+			align-items: flex-start;
+			gap: 16px;
+		}
+			.window .content .buttons button {
+				width: 200px;
+				height: 32px;
+				padding: 0;
+				margin: 0;
+				border: none;
+				border-radius: 16px;
+				background: color-mix(in srgb, var(--text) 10%, transparent);
+				color: inherit;
+				font-family: inherit;
+				font-size: 13px;
+				font-weight: 400;
+				cursor: pointer;
+			}
+				.window .content .buttons button:hover {
+					background: color-mix(in srgb, var(--text) 15%, transparent);
+				}
+			
+			.window .content .buttons .continue button {
+				background: #5841d8;
+				color: white;
+				font-size: 15px;
+				font-weight: 700;
+			}
+				.window .content .buttons .continue button:hover {
+					background: #3c26ab;
+				}
+				
+			.window .content .buttons .continue p {
+				font-size: 12px;
+				margin: 6px 0 0;
+			}
+				.window .content .buttons .continue p b {
+					color: #5841d8;
+				}
+			
 		#subscription .content .features {
 			text-align: left;
 			list-style: none;
@@ -251,49 +320,6 @@ body {
 				
 				#subscription .content .features li:not(:last-child) {
 					margin-bottom: 16px;
-				}
-		
-		#subscription .content .buttons {
-			margin: 32px 0 0;
-			display: flex;
-			justify-content: center;
-			align-items: flex-start;
-			gap: 16px;
-		}
-			#subscription .content .buttons button {
-				width: 200px;
-				height: 32px;
-				padding: 0;
-				margin: 0;
-				border: none;
-				border-radius: 16px;
-				background: color-mix(in srgb, var(--text) 10%, transparent);
-				color: inherit;
-				font-family: inherit;
-				font-size: 13px;
-				font-weight: 400;
-				cursor: pointer;
-			}
-				#subscription .content .buttons button:hover {
-					background: color-mix(in srgb, var(--text) 15%, transparent);
-				}
-			
-			#subscription .content .buttons .continue button {
-				background: #5841d8;
-				color: white;
-				font-size: 15px;
-				font-weight: 700;
-			}
-				#subscription .content .buttons .continue button:hover {
-					background: #3c26ab;
-				}
-				
-			#subscription .content .buttons .continue p {
-				font-size: 12px;
-				margin: 6px 0 0;
-			}
-				#subscription .content .buttons .continue p b {
-					color: #5841d8;
 				}
 				
 		#subscription .content .reviews {
@@ -471,14 +497,14 @@ body {
 							animation: 2s updown 0s linear infinite both;
 						}
 		
-		#subscription .content .label {
+		.window .content .label {
 			display: block;
 		}			
-			#subscription .content .label input[type="checkbox"] {
+			.window .content .label input[type="checkbox"] {
 				vertical-align: top;
 				margin: 2px 6px 0 0;
 			}
-				#subscription .content .label .text {
+				.window .content .label .text {
 					vertical-align: top;
 				}
 				
@@ -486,21 +512,21 @@ body {
 					opacity: 0;
 				}
 				
-				#subscription .content .label:has(input[disabled]) {
+				.window .content .label:has(input[disabled]) {
 					cursor: not-allowed;
 				}
-					#subscription .content .label input[disabled] {
+					.window .content .label input[disabled] {
 						pointer-events: none; /* to enable .label's click handler */
 					}
-					#subscription .content .label:has(input[disabled]) #termsNotRead {
+					.window .content .label:has(input[disabled]) #termsNotRead {
 						opacity: 1;
 					}
 				
-			#subscription .content .label + .buttons {
+			.window .content .label + .buttons {
 				margin-top: 16px;
 			}
 			
-		#subscription .content .terms {
+		.window .content .terms {
 			flex: 1 1 auto;
 			padding: 0 8px 16px;
 			border: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
@@ -512,20 +538,20 @@ body {
 			scrollbar-gutter: stable;
 			max-height: 62px;
 		}
-			#subscription .content .terms p {
+			.window .content .terms p {
 				margin: 8px 0;
 				opacity: 0.7;
 				white-space: pre;
 			}
 			
-			#subscription .content .terms .label {
+			.window .content .terms .label {
 				margin-top: 16px;
 			}
-				#subscription .content .terms .label input[type="checkbox"] {
+				.window .content .terms .label input[type="checkbox"] {
 					margin-top: -2px;
 				}
 				
-		#subscription .content .spinner {
+		.window .content .spinner {
 			margin-top: 16px;
 			
 			img {
@@ -545,6 +571,7 @@ body {
 	--green: #5dbf14;
 	--red: #ef4035;
 	--orange: #fe8b00;
+	--blue: #0066c9;
 }		
 
 @keyframes updown {

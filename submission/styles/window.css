@@ -1,0 +1,236 @@
+.window {
+	grid-area: 1 / 1 / 2 / 2;
+	font-size: 15px;
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	max-width: 608px;
+	max-height: calc(100vh - 32px);
+	margin: 0 16px;
+	background: white;
+	color: var(--text);
+	text-align: center;
+	border-radius: 16px;
+	box-shadow: 0 0 0 1px rgba(0,0,0,0.1), 0 8px 16px -8px rgba(0,0,0,0.3);
+	pointer-events: none;
+	transform: translateY(100vh) rotateX(-45deg) scale(0.8);
+	opacity: 0;
+	transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+	overflow: hidden;
+}
+
+	.window .header {
+		flex: 0 0 auto;
+		border-bottom: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+		padding: 20px 16px 16px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+	}
+		.window .header:after {
+			content: "";
+			position: absolute;
+			right: 0; bottom: -1px; left: 0;
+			height: 1px;
+		}
+		
+		.window.red .header {
+			background: linear-gradient(to bottom, white, color-mix(in srgb, var(--red) 10%, transparent));
+		}
+			.window.red .header:after {
+				background: linear-gradient(to right, color-mix(in srgb, var(--red) 10%, transparent), var(--red), color-mix(in srgb, var(--red) 10%, transparent));
+			}
+		.window.orange .header {
+			background: linear-gradient(to bottom, white, color-mix(in srgb, var(--orange) 10%, transparent));
+		}
+			.window.orange .header:after {
+				background: linear-gradient(to right, color-mix(in srgb, var(--orange) 10%, transparent), var(--orange), color-mix(in srgb, var(--orange) 10%, transparent));
+			}
+		.window.green .header {
+			background: linear-gradient(to bottom, white, color-mix(in srgb, var(--green) 10%, transparent));
+		}
+			.window.green .header:after {
+				background: linear-gradient(to right, color-mix(in srgb, var(--green) 10%, transparent), var(--green), color-mix(in srgb, var(--green) 10%, transparent));
+			}
+		.window.blue .header {
+			background: linear-gradient(to bottom, white, color-mix(in srgb, var(--blue) 10%, transparent));
+		}
+			.window.blue .header:after {
+				background: linear-gradient(to right, color-mix(in srgb, var(--blue) 10%, transparent), var(--blue), color-mix(in srgb, var(--blue) 10%, transparent));
+			}
+		
+		.window .header .icon {
+			width: 40px;
+			height: 40px;
+			margin-right: 16px;
+		}
+			.window .header .icon img {
+				display: block;
+			}
+			
+		.window .header .text {
+			text-align: left;
+		}
+		
+		.window .header h1 {
+			margin: 10px 0;
+			font-size: 20px;
+			line-height: 20px;
+			font-weight: 300;
+			opacity: 0.8;
+		}
+		
+		.window .header .version {
+			margin: 4px 0 6px;
+			display: flex;
+			align-items: center;
+		}
+			.window .header .version img {
+				display: block;
+				height: 30px;
+			}
+			.window .header .version h1 {
+				margin: 10px 0 0 8px;
+			}
+		
+		.window .header h2 {
+			margin: 0;
+			font-size: 16px;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.4px;
+		}
+			.window.red .header h2 {
+				color: var(--red);
+			}
+			.window.orange .header h2 {
+				color: var(--orange);
+			}
+			.window.green .header h2 {
+				color: var(--green);
+			}
+			.window.blue .header h2 {
+				color: var(--blue);
+			}
+	
+	.window .content {
+		flex: 1 1 auto;
+		display: grid;
+		grid-template-columns: 100%;
+		overflow: hidden;
+		overflow-y: auto;
+	}
+		.window .content .step {
+			grid-area: 1 / 1 / 2 / 2;
+			opacity: 0;
+			transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+			pointer-events: none;
+		}
+			.window .content .step.active {
+				pointer-events: auto;
+				transform: translateX(0);
+				opacity: 1;
+			}
+			.window .content .step.padded {
+				padding: 0 16px 16px;
+			}
+			.window .content .step.left {
+				transform: translateX(-100%);
+			}
+			.window .content .step.right {
+				transform: translateX(100%);
+			}
+			
+			.window .content .step .inner {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				min-height: 333px; /* matches the tallest step at max width */
+			}
+			
+		.window .content h3 {
+			margin: 26px 0;
+			font-size: 16px;
+			font-weight: 500;
+		}
+			.window .content h3 + p {
+				margin-top: -16px;
+			}
+			
+			.window .content p + .buttons {
+				margin-top: 16px;
+			}
+		
+		.window .content .buttons {
+			margin: 32px 0 0;
+			display: flex;
+			justify-content: center;
+			align-items: flex-start;
+			gap: 16px;
+		}
+			.window .content .buttons button {
+				width: 200px;
+				height: 32px;
+				padding: 0;
+				margin: 0;
+				border: none;
+				border-radius: 16px;
+				background: color-mix(in srgb, var(--text) 10%, transparent);
+				color: inherit;
+				font-family: inherit;
+				font-size: 13px;
+				font-weight: 400;
+				cursor: pointer;
+			}
+				.window .content .buttons button:hover {
+					background: color-mix(in srgb, var(--text) 15%, transparent);
+				}
+			
+			.window .content .buttons .continue button {
+				background: #5841d8;
+				color: white;
+				font-size: 15px;
+				font-weight: 700;
+			}
+				.window .content .buttons .continue button:hover {
+					background: #3c26ab;
+				}
+				
+			.window .content .buttons .continue p {
+				font-size: 12px;
+				margin: 6px 0 0;
+			}
+				.window .content .buttons .continue p b {
+					color: #5841d8;
+				}
+				
+		.window .content .label {
+			display: block;
+		}			
+			.window .content .label input[type="checkbox"] {
+				vertical-align: top;
+				margin: 2px 6px 0 0;
+			}
+				.window .content .label .text {
+					vertical-align: top;
+				}
+				
+				#termsNotRead {
+					opacity: 0;
+				}
+				
+				.window .content .label:has(input[disabled]) {
+					cursor: not-allowed;
+				}
+					.window .content .label input[disabled] {
+						pointer-events: none; /* to enable .label's click handler */
+					}
+					.window .content .label:has(input[disabled]) #termsNotRead {
+						opacity: 1;
+					}
+				
+			.window .content .label + .buttons {
+				margin-top: 16px;
+			}

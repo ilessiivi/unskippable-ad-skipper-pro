@@ -1,0 +1,39 @@
+#skip {
+	display: none;
+	position: absolute;
+	z-index: 2;
+	right: 0; bottom: 60px;
+	padding: 10px 18px;
+	background: rgba(0, 0, 0, 0.6);
+	color: white;
+	border: 1px solid black;
+	border-right-width: 0;
+	border-radius: 4px 0 0 4px;
+	font-size: 18px;
+	font-family: inherit;
+	font-variant-numeric: tabular-nums;
+	cursor: not-allowed;
+	opacity: 0.7;
+	transform: translateX(0);
+	transition: transform 0.8s ease-in-out;
+}
+	#overlay-container.started:not(.skipped) #skip {
+		display: block;
+	}
+	#overlay-container.subscribing #skip {
+		transform: translateX(100%);
+		pointer-events: none;
+	}
+	
+	#skip.active {
+		cursor: pointer;
+		opacity: 1;
+	}
+	
+	#skip-sub {
+		font-size: 12px;
+		margin-top: 4px;
+	}
+		#skip.active #skip-sub {
+			display: none;
+		}

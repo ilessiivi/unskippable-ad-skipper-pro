@@ -1,0 +1,27 @@
+#subscription .content .features {
+	text-align: left;
+	list-style: none;
+	display: inline-block;
+	vertical-align: top;
+	padding: 0;
+	margin: 0 auto;
+}
+	#subscription .content .features li {
+		padding: 0 0 0 6px;
+		font-size: 15px;
+		line-height: 20px;
+	}
+		#subscription .content .features li:before {
+			content: "";
+			display: inline-block;
+			vertical-align: top;
+			width: 20px;
+			height: 20px;
+			background: url("../../icons/feature.svg") 50% 50% no-repeat;
+			background-size: contain;
+			margin-right: 8px;
+		}
+		
+		#subscription .content .features li:not(:last-child) {
+			margin-bottom: 16px;
+		}

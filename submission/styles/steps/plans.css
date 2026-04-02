@@ -1,0 +1,150 @@
+#subscription .content .plans {
+	flex: 1 1 auto;
+	display: flex;
+	gap: 16px;
+}
+	#subscription .content .plans .plan {
+		flex: 1 1 50%;
+		padding: 0 16px;
+		border-radius: 6px;
+		position: relative;
+	}
+		#subscription .content .plans .plan .name {
+			margin: 0 0 16px;
+			min-height: 78px;
+			border-bottom: 1px solid color-mix(in srgb, var(--text) 5%, transparent);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+			#subscription .content .plans .plan .name h1 {
+				font-size: 18px;
+				margin: 0;
+			}
+		
+		#subscription .content .plans .plan .banner {
+			position: absolute;
+			top: -6px;
+			left: -6px;
+			width: 100px;
+			height: 100px;
+			overflow: hidden;
+		}
+			#subscription .content .plans .plan .banner .shadow:before,
+			#subscription .content .plans .plan .banner .shadow:after {
+				content: "";
+				position: absolute;
+				display: block;
+				background-color: color-mix(in srgb, var(--orange) 80%, black);
+				z-index: 3;
+			}
+			#subscription .content .plans .plan .banner .shadow:before {
+				top: 0;
+				left: 73px;
+				width: 6px;
+				height: 3px;
+			}
+			#subscription .content .plans .plan .banner .shadow:after {
+				top: 73px;
+				left: 0;
+				width: 3px;
+				height: 6px;
+			}
+				
+			#subscription .content .plans .plan .banner .text {
+				transform: rotate(-45deg) translate(-50%, 100%);
+				transform-origin: top left;
+				background: linear-gradient(to bottom, var(--orange), color-mix(in srgb, var(--orange) 66%, var(--red)));
+				color: white;
+				width: 140px;
+				height: 28px;
+				font-size: 14px;
+				font-weight: 700;
+				line-height: 28px;
+				position: relative;
+				z-index: 4;
+				box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset;
+				text-shadow: -1px 1px 2px rgba(0,0,0,0.3);
+			}
+		
+		#subscription .content .plans .plan .features li {
+			font-size: 14px;
+			line-height: 16px;
+		}
+			#subscription .content .plans .plan .features li:before {
+				width: 16px;
+				height: 16px;
+			}
+			
+		#subscription .content .plans .plan .select {
+			width: 100%;
+			height: 32px;
+			margin: 16px 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		#subscription .content .plans .plan.current {
+			border: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+			background: #c2c8cb;
+			padding: 2px 0; /* to match upsell's border */
+		}
+			#subscription .content .plans .plan.current h1 {
+				font-weight: 400;
+			}
+				#subscription .content .plans .plan.current .features li:before {
+					background-image: url("../../icons/expired.svg");
+				}
+				
+			#subscription .content .plans .plan.current .select button {
+				border: 1px solid rgba(0,0,0,0.2);
+				background: #abb0b3;
+				color: var(--text);
+				border-radius: 2px;
+				cursor: pointer;
+				height: 20px;
+				padding: 0 4px;
+				font: 400 14px/20px sans-serif;
+				margin-top: 2px;
+			}
+				#subscription .content .plans .plan.current .select button:hover {
+					background: #9fa4a6;
+				}
+			
+		#subscription .content .plans .plan.upsell {
+			border: 3px solid var(--orange);
+			background: linear-gradient(to bottom, color-mix(in srgb, var(--orange) 5%, white), color-mix(in srgb, var(--orange) 15%, white));
+			color: color-mix(in srgb, var(--orange) 66%, var(--red));
+			cursor: pointer;
+		}
+			#subscription .content .plans .plan.upsell h1 {
+				max-width: 185px;
+			}
+			
+			#subscription .content .plans .plan.upsell .features {
+				color: var(--text);
+			}
+				#subscription .content .plans .plan.upsell .features li:before {
+					background-image: url("../../icons/thumb.svg");
+				}
+				
+			#subscription .content .plans .plan.upsell .select button {
+				border: none;
+				height: 32px;
+				padding: 0 20px;
+				background: linear-gradient(to bottom, var(--orange), color-mix(in srgb, var(--orange) 66%, var(--red)));
+				color: white;
+				border-radius: 16px;
+				cursor: pointer;
+				font: inherit;
+				font-weight: 500;
+				box-shadow: inset 0 1px 4px rgba(255,255,255,0.3), inset 0 0px 2px rgba(0,0,0,0.1), 0 2px 8px -4px var(--red);
+				text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+				pointer-events: none;
+				transform: translateY(0);
+			}
+				#subscription .content .plans .plan.upsell:hover .select button {
+					background: linear-gradient(to bottom, color-mix(in srgb, var(--orange) 80%, white), color-mix(in srgb, var(--orange) 66%, var(--red)));
+					animation: 2s updown 0s linear infinite both;
+				}

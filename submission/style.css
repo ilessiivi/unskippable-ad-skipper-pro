@@ -478,10 +478,12 @@ body {
 				
 				#subscription .content .label:has(input[disabled]) {
 					cursor: not-allowed;
-					
-					#termsNotRead {
-						opacity: 1;
 					}
+					#subscription .content .label input[disabled] {
+						pointer-events: none; /* to enable .label's click handler */
+					}
+					#subscription .content .label:has(input[disabled]) #termsNotRead {
+						opacity: 1;
 				}
 				
 			#subscription .content .label + .buttons {

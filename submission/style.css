@@ -551,9 +551,9 @@ body {
 
 @keyframes speen {
 	0% {
-		transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+		transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(-1,-1);
 	}
 	100% {
-		transform: rotateY(360deg) rotateX(-360deg) rotateZ(360deg);
+		transform: rotateY(360deg) rotateX(360deg) rotateZ(360deg) scale(-1,-1);
 	}
 }

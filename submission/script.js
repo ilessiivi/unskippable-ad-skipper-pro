@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			$payment.classList.replace("right", "active");
 		}, 100);
 		
-		closeTimeout = setTimeout(done, 3000);
+		closeTimeout = setTimeout(done, 5000);
 		
 		if(selectedUpsell) {
 			document.querySelector("#subscription").classList.replace("red", "green");

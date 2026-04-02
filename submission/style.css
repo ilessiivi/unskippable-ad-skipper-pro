@@ -20,6 +20,9 @@ body {
 	perspective: 100vw;
 	overflow: hidden;
 	transition: background-color 0.8s ease-in-out;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 	#overlay-container.subscribing {
 		background: rgba(0,0,0,0.5);
@@ -67,11 +70,14 @@ body {
 
 #subscription {
 	font-size: 15px;
-	position: absolute;
+	position: relative;
+	z-index: 1;
 	display: flex;
 	flex-direction: column;
-	z-index: 1;
-	top: 16px; right: 16px; bottom: 16px; left: 16px;
+	width: 90vw;
+	height: 90vh;
+	max-width: 640px;
+	max-height: 446px;
 	background: white;
 	color: var(--color);
 	text-align: center;
@@ -478,13 +484,13 @@ body {
 				
 				#subscription .content .label:has(input[disabled]) {
 					cursor: not-allowed;
-					}
+				}
 					#subscription .content .label input[disabled] {
 						pointer-events: none; /* to enable .label's click handler */
 					}
 					#subscription .content .label:has(input[disabled]) #termsNotRead {
 						opacity: 1;
-				}
+					}
 				
 			#subscription .content .label + .buttons {
 				margin-top: 16px;

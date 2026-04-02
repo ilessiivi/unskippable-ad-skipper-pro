@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	let upsellPlanName = currentPlanName;
 	
-	if(currentSubscription == 0) { // hardcode the first upsell for memes
+	if(currentPlanName == "Pro Ultra") { // hardcode the first upsell for memes
 		upsellPlanName += " Max Joel";
 	} else {
 		for(let i = 0; i < (currentSubscription > 3 ? 4 : randomBetween(1, 3)); i++) {

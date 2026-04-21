@@ -139,7 +139,7 @@
 								</ul>
 								
 								<div class="select">
-									<button>Upgrade to Premium!</button>
+									<button class="coolButton">Upgrade to Premium!</button>
 								</div>
 							</div>
 						</div>
@@ -461,7 +461,7 @@
 					<div class="inner">
 						<h3>Great! Just one more step!</h3>
 						
-						<p>Just wait a moment as your payment is being processed…</p>
+						<p>Your payment is being processed &ndash; this may take up to 2 or 5 minutes.</p>
 						
 						<div class="spinner">
 							<img src="icons/spinner.svg" alt="" />
@@ -476,32 +476,243 @@
 						<p>Click &ldquo;skip&rdquo; below to skip the ad. Click anywhere else to resume the ad.</p>
 						
 						<div class="buttons">
-							<button><span id="actuallySkip">skip</span></button>
+							<button id="resumeNow"><span id="actuallySkip">skip</span></button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		
-		<div id="pudding" class="window blue">
+		<div id="pudding" class="window">
 			<div class="header">
 				<div class="text">
-					<h1>Special Offer!</h1>
+					<h1><img src="icons/upsell.svg" alt="" /><b>Special Offer</b> while you wait!<img src="icons/upsell.svg" alt="" /></h1>
 					
-					<h2>Pudding! Miller! Now Available!</h2>
+					<h2>Pudding! Miller! Now Restocked!</h2>
+				</div>
+				
+				<div class="close puddingDone">
+					<img src="icons/expired.svg" alt="" />
 				</div>
 			</div>
 			
 			<div class="content">
 				<div class="step padded active" id="offers">
-					<h3>It seems that the payment is pending for 2 or 5 minutes.</h3>
-					
-					<p>Please peruse these special offers while you wait!</p>
-					
-					<div id="dogs">
-						<div class="dog"></div>
+					<div class="inner">
+						<div class="puddings">
+							<div class="pudding">
+								<div class="image">
+									<img src="puddings/pudding.jpg" id="puddingImg" alt="carl" />
+								</div>
+								
+								<div class="info">
+									<h1>Pudding</h1>
+									
+									<h2><s>$3,000.00</s> <b>$2,300.00</b></h2>
+									<h3>You save $700.00 (23%)</h3>
+									
+									<p>Most of our Puddings are vet checked or well socialized. This fluffy little boy will fit right in your pocket, but prefers to sit on your head.</p>
+								</div>
+								
+								<div class="purchase">
+									<div class="status inStock">
+										<img src="icons/feature.svg" alt="" />In Stock
+									</div>
+									
+									<div class="quantity">
+										<label for="pudding1">Quantity:</label><input type="text" id="pudding1" value="3" />
+									</div>
+									
+									<div class="warranty">
+										<label class="label" for="puddingCheck1">
+											<input id="puddingCheck1" type="checkbox" /><span class="text">Extended Warranty</span>
+										</label>
+										
+										<label class="label" for="puddingCheck2">
+											<input id="puddingCheck2" type="checkbox" /><span class="text">Hawk-proof Armor</span>
+										</label>
+									</div>
+									
+									<div class="buttons">
+										<button id="toPuddingCart" class="coolButton">Add to Cart</button>
+									</div>
+								</div>
+							</div>
+							
+							<div class="pudding">
+								<div class="image">
+									<img src="puddings/carl.jpg" alt="carl" />
+								</div>
+								
+								<div class="info">
+									<h1>Carl</h1>
+									
+									<h2><s>$1.00</s> crows are free at the park you know</h2>
+									
+									<p>Carl has learned several words, but none of them are appropriate for children. He enjoys collecting shiny objects and will trade them for crow snackies, if the deal is right.</p>
+								</div>
+								
+								<div class="purchase">
+									<div class="buttons">
+										<button id="toCarldex">Get Directions to his Park</button>
+									</div>
+								</div>
+							</div>
+							
+							<div class="pudding">
+								<div class="image">
+									<img src="puddings/miller.jpg" alt="carl" />
+								</div>
+								
+								<div class="info">
+									<h1>Miller</h1>
+									
+									<h2><s>$1,700.00</s> <b>$750.00</b></h2>
+									<h3>You save $950.00 (56%)</h3>
+									
+									<p>his cute little Miller is vet checked, up to date on shots and dewormer, plus the breeder provides a health guarantee for Caesar.</p>
+								</div>
+								
+								<div class="purchase">
+									<div class="status backordered">
+										<img src="icons/backordered.svg" alt="" />Backordered
+									</div>
+									
+									<div class="quantity">
+										<label for="pudding2">Quantity:</label><input type="text" id="pudding2" value="1" />
+									</div>
+									
+									<div class="warranty">
+										<label class="label" for="millerCheck1">
+											<input id="millerCheck1" type="checkbox" /><span class="text">Side Order: Caesar</span>
+										</label>
+									</div>
+									
+									<div class="buttons">
+										<button id="toWaitlist">Join the Waitlist</button>
+									</div>
+								</div>
+							</div>
+							
+							<!-- <div class="pudding">
+								<div class="image">
+									<img src="icons/upsell.svg" alt="carl" />
+								</div>
+								
+								<div class="info">
+									<h1>Elephant, Giraffe and/or Tiger</h1>
+									
+									<h2><s>$22,000</s> Only Today <b>Just $21,999.99</b></h2>
+									
+									<p>You could be enjoying the full benefits of owning a [fill name of animal] almost tomorrow if you commit to a purchase today!</p>
+								</div>
+								
+								<div class="purchase">
+									<div class="status inStock">
+										<img src="icons/feature.svg" alt="" />In Stock
+									</div>
+									
+									<div class="quantity">
+										<label for="pudding2">Quantity:</label><input type="text" id="pudding2" value="1" />
+									</div>
+									
+									<div class="warranty">
+										<label class="label" for="millerCheck1">
+											<input id="millerCheck1" type="checkbox" /><span class="text">I want: Giraffe</span>
+										</label>
+										<label class="label" for="millerCheck1">
+											<input id="millerCheck1" type="checkbox" /><span class="text">I want: Elephant</span>
+										</label>
+										<label class="label" for="millerCheck1">
+											<input id="millerCheck1" type="checkbox" /><span class="text">I want: Tirge</span>
+										</label>
+									</div>
+									
+									<div class="buttons">
+										<button id="toWaitlist">Join the Waitlist</button>
+									</div>
+								</div>
+							</div> -->
+						</div>
 					</div>
 				</div>
+				
+				<div class="step padded" id="cart">
+					<div class="inner">
+						<h3>Validating your Pudding order now…</h3>
+						
+						<div class="delayToShow1">
+							<p class="puddingCartHas1">Only one? Somewhere, a second Pudding is judging you…</p>
+							
+							<p class="puddingCartHas2">Two Puddings? Why not get a third to keep them company.</p>
+							
+							<p class="puddingCartHas3">Three Pudding slices? Betrayal! I knew it all along!</p>
+							
+							<p class="puddingCartHasALot"><i>Huh‽</i> How come three Puddings is not enough for you? Straight to prison with you!</p>
+						</div>
+						
+						<div class="delayToShow2">
+							<p class="puddingCartNoWarranty">No <b>Extended Warranty</b> for you, eh? Aren't you concerned about their alternator? Their battery? Their braking system? Their water pump?<br /><i>God forbid!</i> Their navigation‽</p>
+							
+							<p class="puddingCartExtWarranty">With the <b>Extended Warranty</b> you have been upgraded to our gold member status, covering their transmission, engine, braking system, the navigation! <span class="puddingCartNoArmor">(Excluding any hawks, God forbid.)</span></p>
+						</div>
+						
+						<div class="delayToShow3">
+							<p class="puddingCartNoArmor">Not concerned about the hawks I see? Didn't you see the little little box? Well let's see how that turns out for you, without any <b>Hawk armor</b>! <b><i>*Caw-Caw!*</i></b></p>
+							
+							<p class="puddingCartHasArmor">Smart choice to <b>armor up!</b> You can never be too sure around those pesky predators! <b><i>*Caw-Caw!*</i></b> … Oh, those were just crows, whew… Thanks for your purchase anyway.</p>
+						</div>
+						
+						<div class="buttons delayToShow4">
+							<button class="coolButton puddingDone">Confirm Purchase</button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="step padded" id="waitlist">
+					<div class="inner">
+						<h3 class="monospace">Another Miller located! *woof*<br />Estimated wait time: 6-9 months (approx)</h3>
+						
+						<div class="buttons">
+							<button class="coolButton puddingBack">What else was on the menu?</button>
+						</div>
+						
+						<div class="link"><span class="link-text puddingDone">Just skip the ad now</span></div>
+					</div>
+				</div>
+				
+				<div class="step padded" id="carldex">
+					<div class="inner">
+						<h1>CarlDex&trade;</h1>
+						
+						<p>how 2 find:</p>
+						
+						<p>1. open the door<br />
+							2. scan with ur eyes for color <span class="red">green</span><br />
+							3. move towards <span class="blue">that</span><br />
+							4. you have arrived! 🌴🎉💦</p>
+						
+						<div class="buttons">
+							<button class="coolButton puddingBack">yee-caw! back to other offers</button>
+						</div>
+						
+						<div class="link"><span class="link-text puddingDone">just skip the ad now pls</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="progress">
+			<div class="content">
+				<div class="icon">
+					<img src="icons/spinner.svg" alt="" />
+				</div>
+				
+				<h1>Your payment is still being processed…</h1>
+				
+				<h2>Please just wait a moment, sir slash madam.</h2>
+				
+				<div class="timer"></div>
 			</div>
 		</div>
 	</div>

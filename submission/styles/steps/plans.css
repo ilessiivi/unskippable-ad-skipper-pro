@@ -129,7 +129,7 @@
 					background-image: url("../../icons/thumb.svg");
 				}
 				
-			#subscription .content .plans .plan.upsell .select button {
+			.window .content button.coolButton {
 				border: none;
 				height: 32px;
 				padding: 0 20px;
@@ -141,10 +141,14 @@
 				font-weight: 500;
 				box-shadow: inset 0 1px 4px rgba(255,255,255,0.3), inset 0 0px 2px rgba(0,0,0,0.1), 0 2px 8px -4px var(--red);
 				text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-				pointer-events: none;
 				transform: translateY(0);
 			}
-				#subscription .content .plans .plan.upsell:hover .select button {
+				#subscription .content .plans .plan.upsell .select button.coolButton {
+					pointer-events: none;
+				}
+				
+				.window .content button.coolButton:hover,
+				#subscription .content .plans .plan.upsell:hover .select button.coolButton {
 					background: linear-gradient(to bottom, color-mix(in srgb, var(--orange) 80%, white), color-mix(in srgb, var(--orange) 66%, var(--red)));
 					animation: 2s updown 0s linear infinite both;
 				}

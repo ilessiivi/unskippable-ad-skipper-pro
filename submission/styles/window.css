@@ -2,7 +2,6 @@
 	grid-area: 1 / 1 / 2 / 2;
 	font-size: 15px;
 	position: relative;
-	z-index: 1;
 	display: flex;
 	flex-direction: column;
 	max-width: 608px;
@@ -19,6 +18,12 @@
 	transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
 	overflow: hidden;
 }
+	.window#subscription {
+		z-index: 1;
+	}
+	.window#pudding {
+		z-index: 100;
+	}
 
 	.window .header {
 		flex: 0 0 auto;
@@ -75,12 +80,15 @@
 		}
 		
 		.window .header h1 {
-			margin: 10px 0;
+			margin: 4px 0 10px;
 			font-size: 20px;
 			line-height: 20px;
 			font-weight: 300;
 			opacity: 0.8;
 		}
+			.window .header h1 b {
+				font-weight: 600;
+			}
 		
 		.window .header .version {
 			margin: 4px 0 6px;
@@ -113,6 +121,42 @@
 			}
 			.window.blue .header h2 {
 				color: var(--blue);
+			}
+			
+		.window .header h3 {
+			font-size: 14px;
+			font-weight: 300;
+			font-style: italic;
+			opacity: 0.7;
+			margin: 0 0 8px;
+		}
+			.window .header h3 b {
+				font-weight: 500;
+			}
+			
+		.window .header .close {
+			position: absolute;
+			top: 9px;
+			right: 9px;
+			filter: grayscale(100%);
+			opacity: 0.8;
+			width: 10px;
+			height: 10px;
+			cursor: pointer;
+			opacity: 0;
+			pointer-events: none;
+		}
+			.window.canClose .header .close {
+				opacity: 0.3;
+				pointer-events: auto;
+				transition: opacity 0.3s ease-in-out;
+			}
+			
+			.window .header .close img {
+				width: 20px;
+				height: 20px;
+				margin: -5px 0 0 -5px;
+				pointer-events: none;
 			}
 	
 	.window .content {
@@ -147,8 +191,13 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-				min-height: 333px; /* matches the tallest step at max width */
 			}
+				.window#subscription .content .step .inner {
+					min-height: 333px; /* matches the tallest step at max width */
+				}
+				.window#pudding .content .step .inner {
+					min-height: 382px;
+				}
 			
 		.window .content h3 {
 			margin: 26px 0;
@@ -162,6 +211,10 @@
 			.window .content p + .buttons {
 				margin-top: 16px;
 			}
+			
+		.window .content p b {
+			font-weight: 500;
+		}
 		
 		.window .content .buttons {
 			margin: 32px 0 0;
@@ -171,9 +224,9 @@
 			gap: 16px;
 		}
 			.window .content .buttons button {
-				width: 200px;
+				min-width: 200px;
 				height: 32px;
-				padding: 0;
+				padding: 0 16px;
 				margin: 0;
 				border: none;
 				border-radius: 16px;
@@ -206,8 +259,19 @@
 					color: #5841d8;
 				}
 				
+		.window .content .link {
+			margin: 16px 0 0;
+		}
+			.window .content .link-text {
+				cursor: pointer;
+				color: #5841d8;
+				opacity: 0.8;
+				text-decoration: underline;
+			}
+				
 		.window .content .label {
 			display: block;
+			user-select: none;
 		}			
 			.window .content .label input[type="checkbox"] {
 				vertical-align: top;

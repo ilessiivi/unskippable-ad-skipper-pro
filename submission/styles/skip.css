@@ -20,7 +20,8 @@
 	#overlay-container.started:not(.skipped) #skip {
 		display: block;
 	}
-	#overlay-container.subscribing #skip {
+	#overlay-container.subscribing #skip,
+	#overlay-container.specialOffer #skip {
 		transform: translateX(100%);
 		pointer-events: none;
 	}

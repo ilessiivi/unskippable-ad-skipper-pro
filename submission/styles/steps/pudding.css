@@ -1,3 +1,193 @@
-.window .content .puddings {
-	color: red;
+.window#pudding {
+	background: radial-gradient(#dd64c1, #72056b);
+	border: 2px solid #fab639;
+	--text: white;
+	border-radius: 28px;
 }
+	.window#pudding .header {
+		border-bottom-color: 
+	}
+		.window#pudding .header .text {
+			text-align: center;
+		}
+		.window#pudding .header h1 {
+			opacity: 1;
+		}
+			.window#pudding .header h1 img {
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				vertical-align: top;
+				margin: -5px 10px;
+				animation: 1s updown2 0s linear infinite both;
+			}
+				.window#pudding .header h1 img:last-child {
+					animation-delay: 0.5s;
+				}
+		.window#pudding .header h2 {
+			color: #fab639;
+		}
+
+.window .content .puddings {
+	text-align: left;
+	padding-bottom: 8px;
+}
+	.window .content .puddings .pudding {
+		display: flex;
+		gap: 16px;
+		align-items: center;
+		margin-top: 16px;
+		background: white;
+		--text: #222;
+		color: var(--text);
+		padding: 8px;
+		border-radius: 8px;
+		box-shadow: 0 8px 12px -6px rgba(0,0,0,0.2);
+	}
+		.window .content .puddings .pudding:not(:first-child) {
+			border-top: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+			padding-top: 16px;
+		}
+		
+		.window .content .puddings .pudding .image {
+			flex: 0 1 auto;
+		}
+			.window .content .puddings .pudding .image img {
+				display: block;
+				width: 80px;
+				height: 80px;
+				border-radius: 40px;
+			}
+		
+		.window .content .puddings .pudding h1 {
+			font-size: 16px;
+			font-weight: 500;
+			margin: 0 0 8px;
+		}
+		.window .content .puddings .pudding h2 {
+			font-size: 14px;
+			font-weight: 400;
+			margin: 0 0 2px;
+		}
+		.window .content .puddings .pudding h3 {
+			font-size: 12px;
+			font-weight: 450;
+			margin: 0 0 8px;
+			opacity: 0.66;
+		}
+		
+		.window .content .puddings .pudding .info {
+			flex: 1 1 auto;
+		}
+			.window .content .puddings .pudding .info p {
+				font-size: 13px;
+				line-height: 18px;
+				margin: 0;
+				opacity: 0.8;
+			}
+			
+		.window .content .puddings .pudding .purchase {
+			flex: 0 0 auto;
+			width: 200px;
+		}
+			.window .content .puddings .pudding .purchase .quantity {
+				display: flex;
+				margin: 12px 0;
+				font-size: 12px;
+				line-height: 18px;
+			}
+				.window .content .puddings .pudding .purchase .quantity label {
+					margin-right: 6px;
+				}
+				.window .content .puddings .pudding .purchase .quantity input {
+					border: 0;
+					border-bottom: 1px solid color-mix(in srgb, var(--text) 33%, transparent);
+					width: auto;
+					min-width: 20px;
+					height: 18px;
+					padding: 0;
+					font: inherit;
+					line-height: 18px;
+					background: none;
+					outline: none;
+				}
+				
+			.window .content .puddings .pudding .purchase .warranty {
+				margin: 12px 0;
+				font-size: 12px;
+				line-height: 18px;
+			}
+			
+			.window .content .puddings .pudding .purchase .buttons {
+				margin: 12px 0 0;
+			}
+			
+		.window .content .puddings .pudding .status {
+			font-size: 13px;
+			line-height: 16px;
+			margin: 12px 0;
+		}
+			.window .content .puddings .pudding .status.inStock {
+				color: var(--green);
+				font-weight: 500;
+			}
+			.window .content .puddings .pudding .status.backordered {
+				opacity: 0.7;
+			}
+			
+			.window .content .puddings .pudding .status img {
+				display: inline-block;
+				vertical-align: top;
+				opacity: 0.8;
+			}
+				.window .content .puddings .pudding .status.inStock img {
+					margin: 1px 4px 0 0;
+					width: 14px;
+					height: 14px;
+				}
+				.window .content .puddings .pudding .status.backordered img {
+					margin: 0 2px 0 0;
+					width: 16px;
+					height: 16px;
+				}
+
+#carldex .red {
+	color: var(--red);
+}
+#carldex .blue {
+	color: var(--blue);
+}
+
+#waitlist .monospace {
+	font-family: monospace;
+}
+
+#cart,
+#carldex,
+#waitlist {
+	text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+#pudding .step [class*="puddingCart"]:not(.active) {
+	display: none;
+}
+#pudding .step [class*="delayToShow"] {
+	opacity: 0;
+	transform: translateY(20px);
+	transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+}
+	#pudding .step [class*="delayToShow"]:not(.shown) {
+		pointer-events: none;
+	}
+	
+	#pudding .step .delayToShow1 { transition-delay: 1s; }
+	#pudding .step .delayToShow2 { transition-delay: 3s; }
+	#pudding .step .delayToShow3 { transition-delay: 5s; }
+	#pudding .step .delayToShow4 { transition-delay: 7s; }
+	
+	#pudding .step.active [class*="delayToShow"] {
+		opacity: 1;
+		transform: translateY(0px);
+	}

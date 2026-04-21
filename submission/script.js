@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	const $subscribe = document.querySelector("#subscribe"),
 		$subscribe2 = document.querySelector("#subscribe2");
 	
-	const $resume = document.querySelector("#continueVideo");
+	const $resume = document.querySelector("#continueVideo"),
+		$resumeNow = document.querySelector("#resumeNow");
 	
 	const $details = document.querySelector("#details");
 	
@@ -41,6 +42,24 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	const $actuallySkip = document.querySelector("#actuallySkip");
 	
+	const $pudding = document.querySelector("#pudding"),
+		$puddingImg = document.querySelector("#puddingImg"),
+		$puddingCheck1 = document.querySelector("#puddingCheck1"),
+		$puddingCheck2 = document.querySelector("#puddingCheck2");
+	
+	const $offers = document.querySelector("#offers");
+	
+	const $puddingDoneBtns = document.querySelectorAll("#pudding .puddingDone"),
+		$puddingBackBtns = document.querySelectorAll("#pudding .puddingBack");
+	
+	const $puddingCart = document.querySelector("#cart"),
+		$puddingCartBtn = document.querySelector("#toPuddingCart");
+	
+	const $millerWaitList = document.querySelector("#waitlist"),
+		$waitlistBtn = document.querySelector("#toWaitlist");
+	
+	const $carlDex = document.querySelector("#carldex"),
+		$carldexBtn = document.querySelector("#toCarldex");
 	
 	// Init Skipper Pro Ultra Max Max Neo
 	
@@ -103,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	if(currentSubscription > 0) {
 		document.querySelector("#subscription").classList.replace("red", "orange");
 		document.querySelector("#subscriptionIcon").src = "icons/upsell.svg";
-		document.querySelector("#purchaseReason").textContent = "Your subscription could be improved!";
+		document.querySelector("#purchaseReason").textContent = "You're eligible for an upgrade!";
 		document.querySelector("#purchaseVerb").textContent = "upgrade";
 	}
 	
@@ -115,7 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	let selectedUpsell = false;
 	
 	let delayInterval = null,
-		closeTimeout = null;
+		closeTimeout = null,
+		currentTimeout = null;
 	
 	function play() {
 		$container.classList.add("playing");
@@ -133,17 +153,37 @@ document.addEventListener("DOMContentLoaded", () => {
 		$container.classList.remove("playing");
 		
 		clearInterval(delayInterval);
+		clearTimeout(closeTimeout);
+		
+		clearCurrentStep("subscription");
+		clearTimeout(currentTimeout);
+		
+		$features.classList.remove("left", "right");
+		$features.classList.add("active");
 	}
 	
-	function clearCurrentStep() {
-		const $current = document.querySelector("#overlay-container .step.active");
+	function clearCurrentStep(container, dir) {
+		if(!dir) {
+			dir = "left";
+		}
+		
+		const $current = document.querySelector("#"+ container +" .step.active");
 		
 		if($current) {
-			$current.classList.replace("active", "left");
+			$current.classList.replace("active", dir);
 			
-			setTimeout(() => {
-				$current.classList.remove("left");
+			currentTimeout = setTimeout(() => {
+				$current.classList.remove(dir);
 			}, 400);
+		}
+		
+		const $cont = document.querySelector("#"+ container +" .content");
+		
+		if($cont) {
+			$cont.scrollTo({
+				top: 0,
+				behavior: "smooth"
+			});
 		}
 	}
 	
@@ -151,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		clearInterval(delayInterval);
 		clearTimeout(closeTimeout);
 		
-		clearCurrentStep();
+		clearCurrentStep("subscription");
 		
 		$details.classList.add("right");
 		
@@ -161,21 +201,31 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	
 	function choosePlan(plan) {
-		clearCurrentStep();
+		selectedUpsell = (plan === "upsell");
+		
+		if(plan === "upsell" || !currentSubscription) {
+			terms();
+		} else {
+			resume();
+		}
+	}
+	
+	function terms() {
+		clearCurrentStep("subscription");
 		
 		$terms.classList.add("right");
 		
 		setTimeout(() => {
 			$terms.classList.replace("right", "active");
 		}, 100);
-		
-		selectedUpsell = (plan === "upsell");
 	}
 	
 	function payment() {
 		clearTimeout(closeTimeout);
 		
-		clearCurrentStep();
+		clearCurrentStep("subscription");
+		
+		$container.classList.add("paymentPending");
 		
 		$payment.classList.add("right");
 		
@@ -183,7 +233,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			$payment.classList.replace("right", "active");
 		}, 100);
 		
-		closeTimeout = setTimeout(done, 5000);
+		// closeTimeout = setTimeout(done, 5000);
+		closeTimeout = setTimeout(pudding, (!currentSubscription ? 5000 : 1000));
 		
 		if(selectedUpsell) {
 			document.querySelector("#subscription").classList.replace("red", "green");
@@ -203,28 +254,44 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 	
-	function done() {
-		clearCurrentStep();
+	function pudding() {
+		$container.classList.add("specialOffer");
 		
-		$done.classList.add("right");
+		$offers.classList.add("active");
 		
 		setTimeout(() => {
-			$done.classList.replace("right", "active");
-		}, 100);
+			$pudding.classList.add("canClose");
+		}, 1000); // 5000
+	}
+	
+	function done() {
+		$container.classList.remove("specialOffer");
 		
-		if(storage) {
-			if(selectedUpsell || currentSubscription == 0) {
-				storage.setItem("timesBoughtSkipperPro", ++currentSubscription);
-			}
+		clearTimeout(closeTimeout);
+		
+		closeTimeout = setTimeout(() => {
+			clearCurrentStep("subscription");
 			
-			if(selectedUpsell) {
-				storage.setItem("currentSkipperProPlan", upsellPlanName);
+			$done.classList.add("right");
+			
+			setTimeout(() => {
+				$done.classList.replace("right", "active");
+			}, 100);
+			
+			if(storage) {
+				if(selectedUpsell || currentSubscription == 0) {
+					storage.setItem("timesBoughtSkipperPro", ++currentSubscription);
+				}
+				
+				if(selectedUpsell) {
+					storage.setItem("currentSkipperProPlan", upsellPlanName);
+				}
 			}
-		}
+		}, 2000);
 	}
 	
 	function resume() {
-		clearCurrentStep();
+		clearCurrentStep("subscription");
 		
 		$resuming.classList.add("right");
 		
@@ -237,18 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				delay -= 0.1;
 				
 				if(delay <= 0) {
-					play();
-					
-					communicate("play");
-					
-					closeTimeout = setTimeout(() => {
-						document.querySelectorAll("#overlay-container .step.active").forEach(($el) => {
-							$el.classList.remove("active");
-						});
-						
-						$features.classList.remove("left", "right");
-						$features.classList.add("active");
-					}, 1000);
+					resumeNow();
 				} else {
 					$resumeDelay.textContent = delay.toFixed(1);
 				}
@@ -256,9 +312,26 @@ document.addEventListener("DOMContentLoaded", () => {
 		}, 100);
 	}
 	
+	function resumeNow() {
+		play();
+		
+		communicate("play");
+		
+		clearTimeout(closeTimeout);
+		
+		closeTimeout = setTimeout(() => {
+			document.querySelectorAll("#overlay-container .step.active").forEach(($el) => {
+				$el.classList.remove("active");
+			});
+			
+			$features.classList.remove("left", "right");
+			$features.classList.add("active");
+		}, 1000);
+	}
+	
 	function actuallySkip() {
 		$container.classList.add("playing", "skipped");
-		$container.classList.remove("subscribing");
+		$container.classList.remove("subscribing", "specialOffer");
 		
 		clearInterval(delayInterval);
 		clearTimeout(closeTimeout);
@@ -266,6 +339,114 @@ document.addEventListener("DOMContentLoaded", () => {
 		closeTimeout = setTimeout(() => {
 			communicate("success");
 		}, 1000);
+	}
+	
+	function puddingCart() {
+		const $options = document.querySelectorAll(`#pudding [class*="puddingCart"]`);
+		
+		if($options) {
+			$options.forEach(($el) => {
+				$el.classList.remove("active");
+			});
+		}
+		
+		const $qty = document.querySelector("#pudding1");
+		
+		if($qty) {
+			const qty = parseInt($qty.value);
+			
+			let sel = "";
+			
+			if(qty >= 1 && qty <= 3) {
+				sel = "puddingCartHas"+ qty;
+			} else {
+				sel = "puddingCartHasALot";
+			}
+			
+			const $qtyEls = document.querySelectorAll("."+ sel);
+			
+			if($qtyEls) {
+				$qtyEls.forEach(($el) => $el.classList.add("active"));
+			}
+		}
+		
+		const $warranty = document.querySelector("#puddingCheck1");
+		
+		let warrantySel = "puddingCartNoWarranty";
+		
+		if($warranty && $warranty.checked) {
+			warrantySel = "puddingCartExtWarranty"
+		}
+		
+		const $warrantyEls = document.querySelectorAll("."+ warrantySel);
+		
+		if($warrantyEls) {
+			$warrantyEls.forEach(($el) => $el.classList.add("active"));
+		}
+		
+		const $armor = document.querySelector("#puddingCheck2");
+		
+		let armorSel = "puddingCartNoArmor";
+		
+		if($armor && $armor.checked) {
+			armorSel = "puddingCartHasArmor"
+		}
+		
+		const $armorEls = document.querySelectorAll("."+ armorSel);
+		
+		if($armorEls) {
+			$armorEls.forEach(($el) => $el.classList.add("active"));
+		}
+		
+		const $delayed = document.querySelectorAll(`#pudding [class*="delayToShow"]`);
+		
+		if($delayed) {
+			$delayed.forEach(($el) => {
+				$el.classList.remove("shown");
+				
+				$el.addEventListener("transitionend", () => {
+					$el.classList.add("shown");
+				});
+			});
+		}
+		
+		clearCurrentStep("pudding");
+		
+		$puddingCart.classList.add("right");
+		
+		setTimeout(() => {
+			$puddingCart.classList.replace("right", "active");
+		}, 100);
+	}
+	
+	function millerWaitList() {
+		clearCurrentStep("pudding");
+		
+		$millerWaitList.classList.add("right");
+		
+		setTimeout(() => {
+			$millerWaitList.classList.replace("right", "active");
+		}, 100);
+	}
+	
+	function carlDex() {
+		clearCurrentStep("pudding");
+		
+		$carlDex.classList.add("right");
+		
+		setTimeout(() => {
+			$carlDex.classList.replace("right", "active");
+		}, 100);
+	}
+	
+	function backToPudding() {
+		clearCurrentStep("pudding", "right");
+		
+		$offers.classList.add("left");
+		
+		setTimeout(() => {
+			$offers.classList.replace("left", "active");
+		}, 100);
 	}
 	
 	
@@ -313,7 +494,38 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 	
-	$actuallySkip.addEventListener("click", actuallySkip);
+	$puddingCartBtn.addEventListener("click", puddingCart);
+	$waitlistBtn.addEventListener("click", millerWaitList);
+	$carldexBtn.addEventListener("click", carlDex);
+	
+	$puddingCheck2.addEventListener("change", () => {
+		$puddingImg.src = ($puddingCheck2.checked ? "./puddings/puddingHawkArmor_chatgpt.jpg" : "./puddings/pudding.jpg");
+	});
+	
+	$puddingDoneBtns.forEach(($el) => {
+		$el.addEventListener("click", () => {
+			if($container.classList.contains("subscribing")) {
+				done();
+			} else {
+				actuallySkip();
+			}
+		});
+	});
+	
+	$puddingBackBtns.forEach(($el) => {
+		$el.addEventListener("click", backToPudding);
+	});
+	
+	$resumeNow.addEventListener("click", resumeNow);
+	
+	$actuallySkip.addEventListener("click", (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+		
+		actuallySkip();
+		
+		return false;
+	});
 	
 	window.addEventListener("message", (event) => {
 		if(event.data && event.data.type) {

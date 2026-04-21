@@ -1,6 +1,7 @@
 @import "styles/overlay.css";
 @import "styles/skip.css";
 @import "styles/window.css";
+@import "styles/progress.css";
 
 @import "styles/steps/features.css";
 @import "styles/steps/plans.css";
@@ -48,6 +49,20 @@ body {
 		transform: translateY(0);
 	}
 }
+@keyframes updown2 {
+	0% {
+		transform: translateY(0);
+	}
+	25% {
+		transform: translateY(-2px);
+	}
+	75% {
+		transform: translateY(2px);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
 
 @keyframes speen {
 	0% {
@@ -55,5 +70,34 @@ body {
 	}
 	100% {
 		transform: rotateY(360deg) rotateX(360deg) rotateZ(360deg) scale(-1,-1);
+	}
+}
+
+@keyframes squish {
+	0% {
+		transform: scale(1, 1);
+	}
+	25% {
+		transform: scale(1.4, 0.4);
+	}
+	50% {
+		transform: scale(0.8, 1.2);
+	}
+	75% {
+		transform: scale(1.1, 0.9);
+	}
+	100% {
+		transform: scale(1, 1);
+	}
+}
+
+@keyframes rot {
+	0% {
+		transform: translateY(0%) translateX(0%) scale(1) rotate(0deg);
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(-100%) translateX(-100%) scale(0) rotate(-720deg);
+		opacity: 0;
 	}
 }

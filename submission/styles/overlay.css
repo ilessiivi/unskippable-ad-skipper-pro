@@ -29,6 +29,9 @@
 		transition: transform 2s var(--bounceEasing), opacity 0.5s ease-in-out;
 	}
 		#overlay-container.subscribing.specialOffer .window#subscription {
-			transform: translateY(-20px) scale(0.8);
-			opacity: 0.66;
+			animation: 1s rot 0s linear 1 forwards;
 		}
+			#overlay-container.subscribing.specialOffer .window#subscription,
+			#overlay-container.subscribing.specialOffer .window#subscription * {
+				pointer-events: none !important;
+			}

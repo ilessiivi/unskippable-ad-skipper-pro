@@ -4,35 +4,32 @@
 	--text: white;
 	border-radius: 28px;
 }
-	.window#pudding .header {
-		border-bottom-color: 
+	.window#pudding .header .text {
+		text-align: center;
 	}
-		.window#pudding .header .text {
-			text-align: center;
+	.window#pudding .header h1 {
+		opacity: 1;
+	}
+		.window#pudding .header h1 img {
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			vertical-align: top;
+			margin: -5px 10px;
+			animation: 1s updown2 0s linear infinite both;
 		}
-		.window#pudding .header h1 {
-			opacity: 1;
-		}
-			.window#pudding .header h1 img {
-				display: inline-block;
-				width: 30px;
-				height: 30px;
-				vertical-align: top;
-				margin: -5px 10px;
-				animation: 1s updown2 0s linear infinite both;
+			.window#pudding .header h1 img:last-child {
+				animation-delay: 0.5s;
 			}
-				.window#pudding .header h1 img:last-child {
-					animation-delay: 0.5s;
-				}
-		.window#pudding .header h2 {
-			color: #fab639;
-		}
-		
-		.window#pudding .header .close {
-			mix-blend-mode: plus-lighter;
-			top: 12px;
-			right: 12px;
-		}
+	.window#pudding .header h2 {
+		color: #fab639;
+	}
+	
+	.window#pudding .header .close {
+		mix-blend-mode: plus-lighter;
+		top: 12px;
+		right: 12px;
+	}
 
 .window .content .puddings {
 	text-align: left;

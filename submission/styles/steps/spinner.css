@@ -1,11 +1,10 @@
 .window .content .spinner {
 	margin-top: 16px;
-	
-	img {
+}
+	.window .content .spinner img {
 		display: inline-block;
 		vertical-align: top;
 		width: 40px;
 		height: 40px;
 		animation: 1.6s speen 0s linear infinite both;
 	}
-}

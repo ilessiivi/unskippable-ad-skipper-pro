@@ -21,7 +21,8 @@
 		display: block;
 	}
 	#overlay-container.subscribing #skip,
-	#overlay-container.specialOffer #skip {
+	#overlay-container.specialOffer #skip,
+	#overlay-container.restarting #skip {
 		transform: translateX(100%);
 		pointer-events: none;
 	}

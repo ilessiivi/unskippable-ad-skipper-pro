@@ -313,6 +313,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	
 	function resumeNow() {
+		$container.classList.add("restarting");
+		
 		play();
 		
 		communicate("play");
@@ -320,12 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		clearTimeout(closeTimeout);
 		
 		closeTimeout = setTimeout(() => {
-			document.querySelectorAll("#overlay-container .step.active").forEach(($el) => {
-				$el.classList.remove("active");
-			});
-			
-			$features.classList.remove("left", "right");
-			$features.classList.add("active");
+			document.location.href += "?restart=1"; // restarts the subscription overlay state
 		}, 1000);
 	}
 	
@@ -546,6 +543,19 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		}
 	});
+	
+	if(document.location.href.indexOf("restart=1") > -1) {
+		$container.classList.add("restarting"); // hack to animate skip button "back" in after a restart
+		$container.classList.add("started");
+		
+		play();
+		
+		clearTimeout(closeTimeout);
+		
+		closeTimeout = setTimeout(() => {
+			$container.classList.remove("restarting");
+		}, 200);
+	}
 });
 
 function randomBetween(min, max) {

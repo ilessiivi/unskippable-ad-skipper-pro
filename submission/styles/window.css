@@ -16,7 +16,6 @@
 	transform: translateY(100vh) rotateX(-45deg) scale(0.8);
 	opacity: 0;
 	transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
-	overflow: hidden;
 }
 	.window#subscription {
 		z-index: 1;
@@ -33,6 +32,7 @@
 		align-items: center;
 		justify-content: center;
 		position: relative;
+		border-radius: 16px 16px 0 0;
 	}
 		.window .header:after {
 			content: "";
@@ -297,4 +297,36 @@
 				
 			.window .content .label + .buttons {
 				margin-top: 16px;
+			}
+			
+	.window .badge {
+		position: absolute;
+		top: -40px;
+		left: -40px;
+		width: 120px;
+		height: 120px;
+		transform-style: preserve-3d;
+		animation: 3s speen2 0s linear infinite both;
+		z-index: 999;
+		background: url("../icons/badge.svg") 50% 50% no-repeat;
+		background-size: contain;
+		color: #72056b;
+		text-align: center;
+		font-weight: 700;
+	}
+		.window .badge .front,
+		.window .badge .back {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			backface-visibility: hidden;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+			.window .badge .front {
+				transform: translate3d(0,0,0); /* needs its own stacking context too */
+			}
+			.window .badge .back {
+				transform: rotateY(180deg);
 			}

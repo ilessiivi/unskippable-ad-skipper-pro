@@ -3,7 +3,7 @@
 	height: 100%;
 	background: rgba(0,0,0,0);
 	position: relative;
-	perspective: 100vw;
+	/* perspective: 100vw; - causes button bg color bug in firefox */
 	overflow: hidden;
 	transition: background-color 0.8s ease-in-out;
 	display: grid;

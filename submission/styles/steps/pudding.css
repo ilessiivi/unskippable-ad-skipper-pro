@@ -27,6 +27,12 @@
 		.window#pudding .header h2 {
 			color: #fab639;
 		}
+		
+		.window#pudding .header .close {
+			mix-blend-mode: plus-lighter;
+			top: 12px;
+			right: 12px;
+		}
 
 .window .content .puddings {
 	text-align: left;

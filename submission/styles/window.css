@@ -4,7 +4,7 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	max-width: 608px;
+	max-width: min(608px, calc(100vw - 32px));
 	max-height: calc(100vh - 32px);
 	margin: 0 16px;
 	background: white;

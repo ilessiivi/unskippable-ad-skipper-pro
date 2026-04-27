@@ -84,10 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}
 	
-	const prices = [3.49, 6.99, 9.99, 12.99, 15.99];
+	const prices = [3.49, 6.99, 12.99, 19.99];
 	
-	const currentPrice = "$"+ (currentSubscription < prices.length ? prices[currentSubscription] : prices[1] * currentSubscription).toFixed(2),
-		upsellPrice = "$"+ ((currentSubscription + 1) < prices.length ? prices[(currentSubscription + 1)] : prices[1] * (currentSubscription + 1)).toFixed(2);
+	const currentPrice = "$"+ (currentSubscription < prices.length ? prices[currentSubscription] : prices[prices.length - 1] * currentSubscription).toFixed(2),
+		upsellPrice = "$"+ ((currentSubscription + 1) < prices.length ? prices[(currentSubscription + 1)] : prices[prices.length - 1] * (currentSubscription + 1)).toFixed(2);
 	
 	const planNameParts = ["Ultra", "Max Max", "Neo", "Pro+", "D1T", "Joel", "E&E"];
 	

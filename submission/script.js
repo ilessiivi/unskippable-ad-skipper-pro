@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	
 	const $pudding = document.querySelector("#pudding"),
 		$puddingImg = document.querySelector("#puddingImg"),
-		$puddingCheck1 = document.querySelector("#puddingCheck1"),
 		$puddingCheck2 = document.querySelector("#puddingCheck2");
 	
 	const $offers = document.querySelector("#offers");

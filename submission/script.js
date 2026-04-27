@@ -61,6 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	const $carlDex = document.querySelector("#carldex"),
 		$carldexBtn = document.querySelector("#toCarldex");
 	
+	const $preorderBtn = document.querySelector("#toWaitlist2");
+	
 	// Init Skipper Pro Ultra Max Max Neo
 	
 	let currentSubscription = 0, // more subscriptions bought -> longer upsell titles and increased pricing
@@ -494,6 +496,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	$puddingCartBtn.addEventListener("click", puddingCart);
 	$waitlistBtn.addEventListener("click", millerWaitList);
 	$carldexBtn.addEventListener("click", carlDex);
+	
+	$preorderBtn.addEventListener("click", () => {
+		alert("An expected error occurred while processing your order!");
+	});
 	
 	$puddingCheck2.addEventListener("change", () => {
 		$puddingImg.src = ($puddingCheck2.checked ? "./puddings/puddingHawkArmor_chatgpt.jpg" : "./puddings/pudding.jpg");
